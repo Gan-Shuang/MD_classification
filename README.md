@@ -26,7 +26,6 @@ optional arguments:
   -i INPUT_FILE  input_file
   -o OUT_DIR     out_dir
 ```
-note：purity information was counted by VAF from VCF file（or loaded by edit py script）  
 ## Test
 ```
 cd MD_classificationcd  
