@@ -8,7 +8,7 @@ import multiprocessing
 from subprocess import call
 
 def cluster(input_file,out_dir):
-    cluster_command=('singularity exec -B /mnt:/mnt,/fastzone:/fastzone /fastzone/soft/MD_classification/cluster_tensorflow.sif Rscript '+work_dir+'/scripts/ConsensusClusterPlus.r '+
+    cluster_command=('singularity exec -B /mnt:/mnt,/fastzone:/fastzone '+work_dir+'/cluster_tensorflow.sif Rscript '+work_dir+'/scripts/ConsensusClusterPlus.r '+
                     '--input '+input_file+' '
                     '--outdir '+out_dir)
 #     print(cluster_command)
@@ -51,7 +51,7 @@ def cluster(input_file,out_dir):
     return(new_sample_type,cluster_ratio)
 
 def TF_NN(input_file,out_dir):
-    NN_command=("singularity exec -B /mnt:/mnt,/fastzone:/fastzone /fastzone/soft/MD_classification/cluster_tensorflow.sif python3 "+work_dir+"/scripts/NN_load_model.py "+
+    NN_command=("singularity exec -B /mnt:/mnt,/fastzone:/fastzone "+work_dir+"/cluster_tensorflow.sif python3 "+work_dir+"/scripts/NN_load_model.py "+
                "-i "+input_file+" "
                "-o "+out_dir)
     call(NN_command,shell=True)
@@ -66,7 +66,7 @@ out_dir=args.out_dir
 if __name__=='__main__':
     if not os.path.exists(out_dir):
         os.makedirs(out_dir)
-    work_dir="/fastzone/soft/MD_classification"
+    work_dir=sys.path[0]
     sample_type,cluster_ratio=cluster(input_file,out_dir)
     cluster_file=open(out_dir+"/Cluster_result","w")
     cluster_file.write("Cluster_subtype\tCluster_ratio\n"+sample_type+"\t"+str(cluster_ratio)+"\n")

@@ -6,8 +6,8 @@ opt <- parse_args(OptionParser(option_list=option_list))
 df_file=opt$input
 out_dir=opt$outdir
 ################################
-gene_list_file=read.table("/fastzone/soft/MD_classification/data/deseq2_selected_genes.txt",header = T,sep = "\t")
-df_data=read.table("/fastzone/soft/MD_classification/data/merge_fpkm.txt",header = T,sep = "\t")
+gene_list_file=read.table("./data/deseq2_selected_genes.txt",header = T,sep = "\t")
+df_data=read.table("./data/merge_fpkm.txt",header = T,sep = "\t")
 df_sample=read.table(df_file,header = T,sep = "\t")
 df=merge(df_data,df_sample,by="geneid")
 gene_list=gene_list_file$gene

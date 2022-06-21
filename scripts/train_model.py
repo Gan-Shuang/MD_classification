@@ -6,7 +6,7 @@ import argparse
 import tensorflow as tf
 from tensorflow.python.keras import layers
 from tensorflow.python.keras import models
-df=pd.read_csv("/mnt/13d1/ganshuang/MD_classification/deseq2_counts/selected_merge_df.txt",sep="\t",index_col="geneid")
+df=pd.read_csv("../data/selected_merge_df.txt",sep="\t",index_col="geneid")
 for i in df.index:
     df.loc[i,"type"]=str(i).split("_")[1].replace("WNT","0").replace("SHH","1").replace("Group3","2").replace("Group4","3").replace("FPKM","0")
 index_train=list(range(0,52))
@@ -29,4 +29,4 @@ model.compile(optimizer="adam",
               loss='sparse_categorical_crossentropy',
               metrics=['acc'])
 history=model.fit(train_x, train_y, epochs=1000)
-model.save("/fastzone/soft/MD_classification/data/MD_model")
+model.save("../data/MD_model")

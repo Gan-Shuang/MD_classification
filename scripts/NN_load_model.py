@@ -8,7 +8,7 @@ from tensorflow.python.keras import layers
 from tensorflow.python.keras import models
 
 def model_prediction(input_file,work_dir):
-    load_model=models.load_model("/fastzone/soft/MD_classification/data/MD_model")
+    load_model=models.load_model(work_dir+"/data/MD_model")
     df_merge=pd.read_csv(input_file,sep="\t",index_col="geneid")
     gene_list=[]
     for i in open(work_dir+"/data/deseq2_selected_genes.txt","r"):
@@ -38,7 +38,7 @@ out_dir=args.out_dir
 if __name__=='__main__':
     if not os.path.exists(out_dir):
         os.makedirs(out_dir)
-    work_dir="/fastzone/soft/MD_classification"
+    work_dir=os.getcwd()
     subtype,ratio=model_prediction(input_file,work_dir)
     out_file=open(out_dir+"/NN_result","w")
     out_file.write("NN_subtype\tNN_ratio\n"+subtype+"\t"+str(ratio)+"\n")
