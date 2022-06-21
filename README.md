@@ -6,7 +6,7 @@ Medulloblastoma(MD) subtype is a indicator of clinical prognosis.Previous resear
 \
 This toolkit provide two strategies : Hierarchical clustering & Neural networks \
 \
-Train datas were downloaded from GSE151519 and GSE164677(total 53 samples were used).With 493 DEG(qadj<0.005,log2foldchange>2) feature were seleted by Deseq2,those feature had best HC performance.
+Train datas were downloaded from GSE151519 and GSE164677(total 53 samples were used).With 493 DEG(qadj<0.005,log2foldchange>2) feature were seleted by Deseq2,those features had better hierarchical clustering performance.
 
 ## Install
 ### build singularity evironment 
@@ -38,13 +38,13 @@ python3 ./run_MD_classification.py -i ./test/test_result_FPKM -o ./test/output/
 ```
 ## Result
 > Cluster_result \
-Hierarchical clustering result,Cluster_ratio=samples of same type in this cluster/samples of all type in this cluster
+Hierarchical clustering result,Cluster_ratio=(samples of same type in this cluster)/(samples of all type in this cluster).
 ```
 Cluster_subtype	Cluster_ratio
 Group3	0.9
 ```
 > NN_result \
-Neural networks result,NN_ratio was calculated by softmax method.
+Neural networks result,NN_ratio was calculated by softmax.
 ```
 NN_subtype	NN_ratio
 Group3	0.9998830556869507
