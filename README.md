@@ -1,4 +1,4 @@
-# MD_classification
+# Medulloblastoma(MD) classification
 Medulloblastoma(MD) subtype classification toolkit
  
 ## Introduction
