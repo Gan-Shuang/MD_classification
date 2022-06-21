@@ -21,7 +21,8 @@ cd scripts
 singularity exec ../cluster_tensorflow.sif python3 train_model.py
 ```
 
-## Method
+## Method 
+input data : Rna-seq fpkm result(genesymbol and fpkm)
 ```
 python3 run_MD_classification.py -h
 usage: run_MD_classification.py [-h] -i INPUT_FILE -o OUT_DIR
