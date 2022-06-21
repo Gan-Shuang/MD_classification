@@ -2,7 +2,8 @@
 Medulloblastoma(MD) subtype classification toolkit
  
 ## Introduction
-
+Medulloblastoma(MD) subtype is a indicator of clinical prognosis.Previous researchs classified MD subtypes by hierarchical clustering of microarray or rna-seq(WNT,SHH,Group3,Group4).
+This toolkit provide two strategies:Hierarchical clustering and Neural networks,and provide two result.
 ## Install
 ### build singularity evironment 
 Reqired R tools and tensorflow in this env 
