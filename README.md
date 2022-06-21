@@ -13,49 +13,34 @@ singularity build cluster_tensorflow.sif docker://ganshuang0925/cluster_tensorfl
 ### Trian model
 ```  
 cd scripts
+singularity exec ../cluster_tensorflow.sif python3 train_model.py
+```
 
-```
-  
-### change work path
-change R script tools path
-```
-cd hlaloh-analysis  
-sed "s#MAIN#${PWD}#g" ${PWD}/lohhla/LOHHLAscript.R > ${PWD}/lohhla/LOHHLAscript_setpath.R  
-chmod a+x ${PWD}/lohhla/LOHHLAscript_setpath.R  
-```
-### unzip reference
-```
-cd hlaloh-analysis  
-cd data  
-gizp -d *gz
-```
 ## Method
 ```
-python3 hlaloh.py -h
+python3 run_MD_classification.py -h
+usage: run_MD_classification.py [-h] -i INPUT_FILE -o OUT_DIR
+MD prediction
 optional arguments:
-  -h, --help            show this help message and exit
-  -normal NORMAL_BAM_FILE, -normalBam NORMAL_BAM_FILE
-                        Input normal bam
-  -tumor TUMOR_BAM_FILE, -tumorBam TUMOR_BAM_FILE
-                        Input tumor bam
-  -out OUTPUT_DIR, -outDir OUTPUT_DIR
-                        Output dir
-  -vcf FINAL_VCF_FILE, -vcf_file FINAL_VCF_FILE
-                        Sample somatic vcf(Get purity if no such information in database)
-  -hla HLATYPE_FILE, -hlaType HLATYPE_FILE
-                        HLA type information file
+  -h, --help     show this help message and exit
+  -i INPUT_FILE  input_file
+  -o OUT_DIR     out_dir
 ```
 note：purity information was counted by VAF from VCF file（or loaded by edit py script）  
 ## Test
-All inputs should be absolute path  
 ```
-cd hlaloh-analysis 
-python3 ${PWD}/hlaloh.py -tumor ${PWD}/test_example/test-tumor.bam -normal ${PWD}/test_example/test-normal.bam -hla ${PWD}/test_example/test-hlatype -vcf ${PWD}/test_example/test.vcf -out ${PWD}/test_out
+cd MD_classificationcd  
+python3 ./run_MD_classification.py -i ./test/test_result_FPKM -o ./test/output/
 ```
 ## Result
-> hlaloh.json
+> Cluster_result
 ```
-[{'genesymbol': 'HLA-A', 'LOH': '阴性'}, {'genesymbol': 'HLA-B', 'LOH': '阳性'}, {'genesymbol': 'HLA-C', 'LOH': '阴性'}]
+Cluster_subtype	Cluster_ratio
+Group3	0.9
 ```
-> tmp dir
->> test.10.DNA.HLAlossPrediction_CI.xls
+> NN_result
+```
+NN_subtype	NN_ratio
+Group3	0.9998830556869507
+```
+
